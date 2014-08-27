@@ -1,0 +1,66 @@
+#if ($node.getErrorDescription()!="") Error Occurred : $node.getErrorDescription() #else
+
+#foreach($child in $node.getChildren())
+    
+    #if ($child.getChildren().size() != 0) 
+    	<li class="parent-node" id="$child.getNodeId()">
+  		<a href = "#" class = "isExpandable"><img class="plus" src="../treeImg/plus.jpg"></a>
+    #else 
+     	<li class="last" id="$child.getNodeId()">
+    #end     	
+    	
+    #set($attr = "")
+	#if ($child.getChildren().size() == 0)
+	  	#if($child.isAppointed())
+	  		#set( $class = "appointed" )
+	   	#else
+	   		#set( $class = "notappointed" )
+	   	#end
+	   	
+	   	#if($child.isMultiNode() == true)
+	   	   #set( $multi = "true" )
+	   	   
+	   	   #set( $streamid = $child.getStreamId() )
+	   	   #set( $discid = $child.getDiscId() )
+	   	   #set( $id = $child.getNodeId() )
+	   	   #set( $group = $child.getStream().getGroupStringList() )
+	   	   
+   		   #set( $valueC = $child.getStream().getValueC() )
+           #set( $valueG = $child.getStream().getValueG() )
+           #set( $valueEP = $child.getStream().getValueEP() )
+           
+           #set( $teacher = $child.getStream().getTeacherName() )
+           
+           #set( $attr = "id='$id' group='[$group]' teacher='$teacher' valuec='$valueC' valueg='$valueG' valueep='$valueEP' class='$class' ismulti='$multi' streamid='$streamid' discid='$discid'")
+	   	#else
+           #set( $multi = "false" )
+           
+           #set( $streamid = "0" )
+           #set( $discid = "0" )
+           #set( $id = $child.getNodeId() )
+           #set( $group = $child.getItem().getName() )
+           
+           #set( $valueC = $child.getItem().getValueC() )
+           #set( $valueG = $child.getItem().getValueG() )
+           #set( $valueEP = $child.getItem().getValueEP() )
+           
+           #set( $teacher = $child.getItem().getTeacherName() )
+           
+           #set( $attr = "id='$id' class='$class' group='$group' teacher='$teacher' valueC='$valueC' valueG='$valueG' valueEp='$valueEP' ismulti='$multi' streamid='$streamid' discid='$discid'")
+	   	#end
+	   	
+	#end 
+  		<input type="checkbox" class="cb" name="$child.getNodeName()"/>
+  	
+	<a href="#" $attr>$child.getNodeName()</a>
+	
+  	
+    #if ( $child.getChildren().size() != 0 )    
+        <ul id="$child.getNodeId()" style="display:none" class="tree-parent">
+        #set ( $node.children = $child.getChildren())
+        #parse ("tree.vm")
+        </ul>
+    #end
+    </li>
+#end
+#end

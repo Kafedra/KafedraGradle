@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:web="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd" version="2.4">
+  <welcome-file-list>
+    <welcome-file>login.jsp</welcome-file>
+  </welcome-file-list>
+  
+  <!-- Adds servlets -->
+  
+  <!-- Hours bar-chart -->
+  <servlet>
+    <display-name>HoursBarChart</display-name>
+    <servlet-name>HoursBarChart</servlet-name>
+    <servlet-class>ru.guap.barchart.HoursBarChart</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>HoursBarChart</servlet-name>
+    <url-pattern>/HoursBarChart</url-pattern>
+  </servlet-mapping>
+  
+  <!-- Percentage bar-chart -->
+  <servlet>
+    <display-name>PercentBarChart</display-name>
+    <servlet-name>PercentBarChart</servlet-name>
+    <servlet-class>ru.guap.barchart.PercentBarChart</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>PercentBarChart</servlet-name>
+    <url-pattern>/PercentBarChart</url-pattern>
+  </servlet-mapping>  
+
+  <!-- DBF upload backend -->
+  <servlet>
+    <display-name>UploadDBF</display-name>
+    <servlet-name>UploadDBF</servlet-name>
+    <servlet-class>ru.guap.main.UploadDBF</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>UploadDBF</servlet-name>
+    <url-pattern>/dbfupload</url-pattern>
+  </servlet-mapping>    
+  
+  <!-- Appointments backend -->
+  <servlet>
+    <display-name>AppointLoadTo</display-name>
+    <servlet-name>AppointLoadTo</servlet-name>
+    <servlet-class>ru.guap.main.AppointLoadTo</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>AppointLoadTo</servlet-name>
+    <url-pattern>/AppointLoadTo</url-pattern>
+  </servlet-mapping>    
+  
+  <!-- Progress bar backend -->
+  <servlet>
+    <display-name>ProgressBar</display-name>
+    <servlet-name>ProgressBar</servlet-name>
+    <servlet-class>ru.guap.progressbar.ProgressBar</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>ProgressBar</servlet-name>
+    <url-pattern>/GetProgress</url-pattern>
+  </servlet-mapping>    
+  
+  <!-- Reports generator servlet -->
+  <servlet>
+    <display-name>CreateReportServlet</display-name>
+    <servlet-name>CreateReportServlet</servlet-name>
+    <servlet-class>ru.guap.reports.CreateReportServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>CreateReportServlet</servlet-name>
+    <url-pattern>/GetReport</url-pattern>
+  </servlet-mapping>    
+</web-app>

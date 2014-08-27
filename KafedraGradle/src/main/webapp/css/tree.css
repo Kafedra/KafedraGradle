@@ -1,0 +1,62 @@
+#tabs .ui-tabs-panel{
+	padding:0;
+}
+
+ul:tree-parent {
+    background: #fff url(../treeImg/tree-expandable.png) no-repeat;
+}
+
+ul.tree{
+	height: 568px;
+    overflow: auto;	
+}
+
+ul.tree, ul.tree ul { 
+	list-style-type: none; 
+	background: url(../treeImg/picture-verticaline.png) repeat-y; 
+	margin: 0; padding: 0; 
+}
+#box1 {
+	position:absolute;
+	top: 50px;
+	left: 50px;
+	}
+
+ul.tree a {
+	text-decoration: none;
+	color: #369;	
+}
+
+
+ul.tree a.current {
+	text-decoration: none;
+	background-color: blue;	
+}
+
+ul.tree ul { 
+	margin-left: 10px; 
+ }
+
+ul.tree li:last-child { 
+ background: #EBE9DE url(../treeImg/picture-lastnode.png) no-repeat; 
+}
+
+ul.tree li { 
+	margin: 0; 
+	padding: 5px; 
+	line-height: 15px; 
+	background: url(../treeImg/picture-currentnode.png) no-repeat; 
+	color: #369; 
+} 
+
+.tree td {
+	color: maroon;
+	font-family: Tahoma, Verdana;
+	font-size: 8pt;
+}
+
+font {
+	color: green;
+	font-family: Tahoma, Verdana;
+	font-size: 8pt;
+}

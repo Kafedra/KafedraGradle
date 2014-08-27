@@ -1,0 +1,96 @@
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: 'eclipse'
+apply plugin: 'eclipse-wtp'
+apply plugin: 'tomcat'
+
+sourceCompatibility = 1.7
+version = '1.0'
+
+war {
+    //webXml = file('src/main/webapp/WEB-INF/web.xml')
+}
+
+tomcat {
+	httpPort = 8080
+	
+	/*jasper {
+		validateXml = true
+		
+		webXmlFragment = file("$webAppDir/WEB-INF/web.xml")
+		outputDir = file("$webAppDir/WEB-INF/src")
+	}*/
+}
+
+repositories {
+    mavenCentral()
+	
+	maven { url 'http://repository.jboss.org/nexus/content/groups/public' }
+}
+
+buildscript {
+   repositories {
+      jcenter()
+   }
+	
+   dependencies {
+      classpath 'org.gradle.api.plugins:gradle-tomcat-plugin:+'	
+   }
+}
+
+tomcatRun {
+	dependsOn("war")
+}
+
+dependencies {				
+	def tomcatVersion = '7.0.11'
+	def mysqlVersion = '5.1.29'
+	
+	tomcat "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}",
+		  "org.apache.tomcat.embed:tomcat-embed-logging-juli:${tomcatVersion}"
+
+	tomcat("org.apache.tomcat.embed:tomcat-embed-jasper:${tomcatVersion}") {
+		exclude group: 'org.eclipse.jdt.core.compiler', module: 'ecj'
+	}   
+
+	providedCompile "org.apache.tomcat:tomcat-catalina:${tomcatVersion}"
+
+	// MySQL
+	compile "mysql:mysql-connector-java:${mysqlVersion}"
+	
+	// Local libs
+	compile fileTree(dir: 'lib', include: '*.jar')
+	
+	// Javax:
+	def javaxServletAPIVersion = '2.5'
+	providedCompile "javax.servlet:servlet-api:${javaxServletAPIVersion}"
+
+	def javaxJspApiVersion     = '2.1'
+	providedCompile "javax.servlet.jsp:jsp-api:${javaxJspApiVersion}"
+
+	def javaxJSTLVersion       = '1.2'
+	providedCompile "javax.servlet:jstl:${javaxJSTLVersion}"	
+	
+	// commons:
+	//def commonsBeanUtilsVersion   = '1.8.3'
+	//compile "commons-beanutils:commons-beanutils:${commonsBeanUtilsVersion}"
+
+	def commonsCollectionsVersion = '3.2.1'
+	compile "commons-collections:commons-collections:${commonsCollectionsVersion}"
+
+	def commonsDigesterVersion    = '2.1'
+	compile "commons-digester:commons-digester:${commonsDigesterVersion}"
+
+	def commonsFileUploadVersion  = '1.2.2'
+	compile "commons-fileupload:commons-fileupload:${commonsFileUploadVersion}"
+
+	def commonsIOVersion          = '2.4'
+	compile "commons-io:commons-io:${commonsIOVersion}"
+
+	def commonsLangVersion        = '2.6'
+	compile "commons-lang:commons-lang:${commonsLangVersion}"
+
+	def commonsLoggingVersion     = '1.1.1'
+	compile "commons-logging:commons-logging:${commonsLoggingVersion}"
+	
+}
